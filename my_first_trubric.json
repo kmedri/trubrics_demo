@@ -1,0 +1,224 @@
+{
+    "name": "classification_trubric",
+    "passed": false,
+    "total_passed": 7,
+    "total_failed": 1,
+    "failing_severity": "error",
+    "data_context_name": "my_first_dataset",
+    "data_context_version": "0.0.1",
+    "model_name": "my_model",
+    "model_version": "0.0.1",
+    "tags": [
+        "nb-demo"
+    ],
+    "run_by": null,
+    "git_commit": "c86ef38ddb07d49b543c0cafc1854a4a49293674",
+    "timestamp": 1684909672,
+    "metadata": {
+        "some parameter": "xyz"
+    },
+    "validations": [
+        {
+            "validation_type": "validate_performance_against_threshold",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "metric": "recall",
+                    "threshold": 0.7
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "performance": 0.7184466019417476,
+                "sample_size": 295
+            },
+            "explanation": "**Performance validation versus a fixed threshold value.**\n\nCompares performance of a model on any of the datasets in the DataContext to a hard coded threshold value.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_performance_against_threshold(\nmetric=\"recall\",\nthreshold=0.8\n)\n```\n\nArgs:\nmetric: performance metric name defined in sklearn (sklearn.metrics.SCORERS) or in a custom scorer fed in when initialising the ModelValidator object.\nthreshold: the performance threshold that the model must attain.\ndataset: the name of a dataset from the DataContext {'testing_data', 'training_data'}.\ndata_slice: the name of the data slice, specified in the slicing_functions parameter of ModelValidator.\nseverity: severity of the validation. Can be either {'error', 'warning', 'experiment'}. If None, defaults to 'error'.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the actual model performance calculated.\n"
+        },
+        {
+            "validation_type": "validate_performance_against_threshold",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "metric": "recall",
+                    "threshold": 0.8,
+                    "data_slice": "children"
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "performance": 1.0,
+                "sample_size": 11
+            },
+            "explanation": "**Performance validation versus a fixed threshold value.**\n\nCompares performance of a model on any of the datasets in the DataContext to a hard coded threshold value.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_performance_against_threshold(\nmetric=\"recall\",\nthreshold=0.8\n)\n```\n\nArgs:\nmetric: performance metric name defined in sklearn (sklearn.metrics.SCORERS) or in a custom scorer fed in when initialising the ModelValidator object.\nthreshold: the performance threshold that the model must attain.\ndataset: the name of a dataset from the DataContext {'testing_data', 'training_data'}.\ndata_slice: the name of the data slice, specified in the slicing_functions parameter of ModelValidator.\nseverity: severity of the validation. Can be either {'error', 'warning', 'experiment'}. If None, defaults to 'error'.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the actual model performance calculated.\n"
+        },
+        {
+            "validation_type": "validate_performance_against_threshold",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "metric": "my_custom_loss",
+                    "threshold": -0.7
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "performance": -0.203,
+                "sample_size": 295
+            },
+            "explanation": "**Performance validation versus a fixed threshold value.**\n\nCompares performance of a model on any of the datasets in the DataContext to a hard coded threshold value.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_performance_against_threshold(\nmetric=\"recall\",\nthreshold=0.8\n)\n```\n\nArgs:\nmetric: performance metric name defined in sklearn (sklearn.metrics.SCORERS) or in a custom scorer fed in when initialising the ModelValidator object.\nthreshold: the performance threshold that the model must attain.\ndataset: the name of a dataset from the DataContext {'testing_data', 'training_data'}.\ndata_slice: the name of the data slice, specified in the slicing_functions parameter of ModelValidator.\nseverity: severity of the validation. Can be either {'error', 'warning', 'experiment'}. If None, defaults to 'error'.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the actual model performance calculated.\n"
+        },
+        {
+            "validation_type": "validate_performance_between_train_and_test",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "metric": "recall",
+                    "threshold": 0.3
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "train_performance": 0.9832635983263598,
+                "test_performance": 0.7184466019417476,
+                "train_sample_size": 596,
+                "test_sample_size": 295
+            },
+            "explanation": "**Performance validation comparing training and test data scores.**\n\nScores the test set and the train set in the DataContext, and validates whether the test score is inferior to but also within a certain range of the train score. Can be used to validate for overfitting\non the training set.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_performance_between_train_and_test(\nmetric=\"recall\",\nthreshold=0.3\n)\n```\n\nArgs:\nmetric: performance metric name defined in sklearn (sklearn.metrics.SCORERS) or in a custom scorer fed in when initialising the ModelValidator object.\nthreshold: a positive value representing the maximum allowable difference between the train and test score.\ndata_slice: the name of the data slice, specified in the slicing_functions parameter of ModelValidator.\nseverity: severity of the validation. Can be either ['error', 'warning', 'experiment']. If None, defaults to 'error'.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the model's performance on test and train sets.\n"
+        },
+        {
+            "validation_type": "validate_test_performance_against_dummy",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "metric": "accuracy"
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "dummy_performance": 0.6508474576271186,
+                "test_performance": 0.7966101694915254,
+                "sample_size": 295
+            },
+            "explanation": "**Performance validation of testing data versus a dummy baseline model.**\n\nTrains a DummyClassifier / DummyRegressor from [sklearn](https://scikit-learn.org/stable/modules/classes.html?highlight=dummy#module-sklearn.dummy) and compares performance against the model on the test set.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_test_performance_against_dummy(\nmetric=\"accuracy\",\nstrategy=\"stratified\"\n)\n```\n\nArgs:\nmetric: performance metric name defined in sklearn (sklearn.metrics.SCORERS) or in a custom scorer fed in when initialising the ModelValidator object.\nstrategy: strategy of scikit-learns dummy model.\ndummy_kwargs: kwargs to be passed to dummy model.\ndata_slice: the name of the data slice, specified in the slicing_functions parameter of ModelValidator.\nseverity: severity of the validation. Can be either ['error', 'warning', 'experiment']. If None, defaults to 'error'.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the model's actual performance on the test set and the dummy model's performance.\n"
+        },
+        {
+            "validation_type": "validate_performance_std_across_slices",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "metric": "accuracy",
+                    "std_threshold": 0.07,
+                    "dataset": "testing_data",
+                    "data_slices": [
+                        "male",
+                        "children"
+                    ]
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "performances": {
+                    "testing_data_male": 0.8078817733990148,
+                    "testing_data_children": 0.9090909090909091
+                },
+                "sample_sizes": {
+                    "testing_data_male": 203,
+                    "testing_data_children": 11
+                }
+            },
+            "explanation": "**Performance validation comparing data slices.**\n\nValidates that a list of model performances on different data slices from a given dataset has a lower\nstandard deviation than a given threshold value.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nslicing_functions = {\"female\": lambda x: x[x[\"Sex\"]==\"female\"], \"male\": lambda x: x[x[\"Sex\"]==\"male\"]}\nmodel_validator = ModelValidator(data=data_context, model=model, slicing_functions=slicing_functions)\nmodel_validator.validate_performance_std_across_slices(\nmetric=\"recall\",\ndataset=\"training_data\",\ndata_slices=[\"male\", \"female\"],\nstd_threshold=0.05,\ninclude_global_performance=True\n)\n```\n\nArgs:\nmetric: performance metric name defined in sklearn (sklearn.metrics.SCORERS) or in a custom scorer fed in when initialising the ModelValidator object.\ndata_slices: a list of of data slices, specified in the slicing_functions parameter of ModelValidator.\nstd_threshold: the standard deviation threshold that must be superior to the standard deviation of all data slice performances.\ndataset: the name of a dataset from the DataContext {'testing_data', 'training_data'}.\ninclude_global_performance: whether or not to include the dataset global performance in the list.\nseverity: severity of the validation. Can be either {'error', 'warning', 'experiment'}. If None, defaults to 'error'.\n"
+        },
+        {
+            "validation_type": "validate_feature_in_top_n_important_features",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "dataset": "testing_data",
+                    "feature": "Sex",
+                    "top_n_features": 3
+                }
+            },
+            "passed": true,
+            "severity": "error",
+            "result": {
+                "feature_importance_ranking": 0,
+                "feature_importance": {
+                    "Sex": 0.08237288135593218,
+                    "Embarked": 0.0037288135593219972,
+                    "Title": 0.039322033898305075,
+                    "Pclass": 0.019999999999999973,
+                    "Age": 0.019999999999999973,
+                    "SibSp": 0.014237288135593208,
+                    "Parch": -0.000677966101694949,
+                    "Fare": 0.012542372881355911
+                }
+            },
+            "explanation": "**Feature importance validation for top n features.**\n\nValidates that a given feature is in the top n most important features. For calculation of feature importance we are using sklearn's permutation_importance.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_feature_in_top_n_important_features(\ndataset=\"testing_data\",\nfeature=\"feature_a\",\ntop_n_features=2,\n)\n```\n\nArgs:\nfeature: feature to assess.\ntop_n_features: the number of most important features that the named feature must be ranked in. E.g. if\ntop_n_features=2, the feature must be within the top two most important features.\ndataset: the name of a dataset from the DataContext to calculate feature importance on {'testing_data', 'training_data'}.\npermutation_kwargs: kwargs to pass into the sklearn.inspection.permutation_importance function.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the actual feature importance ranking.\n"
+        },
+        {
+            "validation_type": "validate_feature_importance_between_train_and_test",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "top_n_features": 2
+                }
+            },
+            "passed": false,
+            "severity": "error",
+            "result": {
+                "training_feature_importance": {
+                    "Parch": -0.000677966101694949,
+                    "Embarked": 0.0037288135593219972,
+                    "Fare": 0.012542372881355911,
+                    "SibSp": 0.014237288135593208,
+                    "Age": 0.019999999999999973,
+                    "Pclass": 0.019999999999999973,
+                    "Title": 0.039322033898305075,
+                    "Sex": 0.08237288135593218
+                },
+                "testing_feature_importance": {
+                    "Parch": 0.0241610738255033,
+                    "SibSp": 0.061241610738254994,
+                    "Embarked": 0.06493288590604022,
+                    "Title": 0.09161073825503355,
+                    "Pclass": 0.10687919463087243,
+                    "Age": 0.11644295302013422,
+                    "Fare": 0.14043624161073823,
+                    "Sex": 0.1583892617449664
+                }
+            },
+            "explanation": "**Permutation feature importance validation between train and test sets.**\n\nValidates that the ranking of top n features is the same for both test and train sets. For calculation of feature importance we are using sklearn's permutation_importance.\n\nExample:\n```py\nfrom trubrics.validations import ModelValidator\nmodel_validator = ModelValidator(data=data_context, model=model)\nmodel_validator.validate_feature_importance_between_train_and_test(\ntop_n_features=1\n)\n```\n\nArgs:\ntop_n_features: the number of most important features to consider for comparison between train and test sets. E.g. if top_n_features=2, the train and test sets must have the same 2 most important features, in the same order.\npermutation_kwargs: kwargs to pass into the sklearn.inspection.permutation_importance function.\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving the actual feature importance ranking.\n"
+        },
+        {
+            "validation_type": "validate_master_age",
+            "validation_kwargs": {
+                "args": [],
+                "kwargs": {
+                    "age_limit_master": 13
+                }
+            },
+            "passed": true,
+            "severity": "warning",
+            "result": {
+                "errors_df": {
+                    "Sex": {},
+                    "Embarked": {},
+                    "Title": {},
+                    "Pclass": {},
+                    "Age": {},
+                    "SibSp": {},
+                    "Parch": {},
+                    "Fare": {},
+                    "Survived": {}
+                }
+            },
+            "explanation": "Validate that passengers with the title \"master\" are younger than a certain age\n\nArgs:\nage_limit_master: cut off value for master\n\nReturns:\nTrue for success, false otherwise. With a results dictionary giving dict of errors.\n"
+        }
+    ]
+}
